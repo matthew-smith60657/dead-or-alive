@@ -1,18 +1,13 @@
 <template>
     <div>
         <h1>DEAD or ALIVE?!</h1>
-        <!-- <div class="fireworks-container" style="background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;"><canvas width="1365" height="975"></canvas></div> -->
-        <movie-id id="movie-id" />
+        <movie-id id="movie-id" v-bind:movieId="$route.params.movieId"/>
+        <!-- {{$route.params.movieId == null}} -->
     </div>
 </template>
 
 <script>
 import MovieId from '@/components/MovieId.vue';
-// import { Fireworks } from 'fireworks-js'
-
-// const container = document.querySelector('.container');
-// const fireworks = new Fireworks(container, { /* options */ });
-// fireworks.start();
 
 export default {
     name: "homePage",

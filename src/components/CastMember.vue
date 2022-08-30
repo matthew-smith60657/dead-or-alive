@@ -59,6 +59,7 @@ export default {
 
 .name {
     text-decoration: underline;
+    margin-right: 1vw;
 }
 
 .dead {

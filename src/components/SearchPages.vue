@@ -1,13 +1,12 @@
 <template>
     <div>
-        <h1>Search Pages</h1>
-        <div class="pageContainer">
-            <div class="linkContainer" v-for="index in $store.state.search_results.total_pages">
+        <h3>Search Pages</h3>
+        <div class="pageContainer" v-if="isLoaded">
+            <div class="linkContainer" v-for="index in $store.state.search.total_pages">
                 <a class="pageLink" v-on:click.prevent="reloadPage">{{index}}</a>
-                <span v-if="index<$store.state.search_results.total_pages">&nbsp;|&nbsp;</span>
+                <span v-if="index<$store.state.search.total_pages">&nbsp;|&nbsp;</span>
             </div>
         </div>
-        <!-- <a v-for="index in $store.state.search_results.total_pages" v-on:click.prevent="reloadPage">{{index}}<span>|</span></a> -->
     </div>
 </template>
 
@@ -17,11 +16,18 @@ import TmdbService from '../services/TmdbService';
 export default {
     methods: {
         reloadPage(event) {
+            this.isLoaded = false;
             TmdbService.changeSearchPage(this.$store.state.search_query, event.target.innerText)
                 .then(response => {
                     this.$store.commit('SET_SEARCH_RESULTS', response.data);
+                    this.isLoaded = true;
                 })
         }
+    },
+    data() {
+        return {
+            isLoaded: true
+        };
     }
 }
 </script>

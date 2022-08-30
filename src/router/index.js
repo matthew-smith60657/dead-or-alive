@@ -12,6 +12,11 @@ const routes = [
     component: HomePage
   },
   {
+    path: '/:movieId',
+    name: 'detail',
+    component: HomePage
+  },
+  {
     path: '/search',
     name: 'search',
     component: SearchResults

@@ -10,7 +10,7 @@ export default new Vuex.Store({
     poster_path: '',
     cast: [],
     search_query: '',
-    search_results: []
+    search: []
   },
   getters: {
   },
@@ -27,8 +27,7 @@ export default new Vuex.Store({
       state.search_query = query;
     },
     SET_SEARCH_RESULTS(state, results) {
-      console.log(results);
-      state.search_results = results;
+      state.search = results;
     }
   },
   actions: {

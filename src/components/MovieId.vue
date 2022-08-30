@@ -1,8 +1,9 @@
 <template>
     <div id="titleContainer">
         <div id="searchContainer">
+            <span>Movie Title:&nbsp;</span>
             <input id="searchBar" type="text" v-model="searchQuery" />
-            <input id="searchButton" type="submit" v-on:click.prevent="searchMovie" />
+            <input id="searchButton" type="submit" v-on:click.prevent="searchMovie"/>
         </div>
         <h1>{{$store.state.title}}</h1>
         <!-- <div id="idContainer">
@@ -26,14 +27,20 @@ export default {
     },
     data() {
         return {
-            movieId: 550,
             searchQuery: '',
             isMovieLoading: true,
             isCastLoading: true
         };
     },
+    props: {
+        movieId: Number
+    },
     created() {
-        this.getMovie(this.movieId);
+        if(this.movieId == null) {
+            this.getMovie(550);
+        } else {
+            this.getMovie(parseInt(this.movieId));
+        }
     },
     methods: {
         newMovie(event) {
