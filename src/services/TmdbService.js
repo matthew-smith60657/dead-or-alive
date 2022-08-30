@@ -16,7 +16,9 @@ export default {
         return http.get(`/person/${id}`+API_KEY);
     },
     searchMovies(query) {
-        console.log(`/search/movie`+API_KEY+`&query=`+query);
         return http.get(`/search/movie`+API_KEY+`&query=`+query);
+    },
+    changeSearchPage(query, page) {
+        return http.get(`/search/movie`+API_KEY+`&query=`+query+`&page=`+page);
     }
 }

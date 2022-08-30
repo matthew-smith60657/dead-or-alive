@@ -9,6 +9,7 @@ export default new Vuex.Store({
     release_date: '',
     poster_path: '',
     cast: [],
+    search_query: '',
     search_results: []
   },
   getters: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     SET_CAST(state, cast) {
       state.cast = cast;
+    },
+    SET_SEARCH_QUERY(state, query) {
+      state.search_query = query;
     },
     SET_SEARCH_RESULTS(state, results) {
       console.log(results);

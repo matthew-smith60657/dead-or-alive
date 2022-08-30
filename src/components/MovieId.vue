@@ -4,11 +4,10 @@
             <input id="searchBar" type="text" v-model="searchQuery" />
             <input id="searchButton" type="submit" v-on:click.prevent="searchMovie" />
         </div>
-        <h1>{{$store.state.search_results}}</h1>
         <h1>{{$store.state.title}}</h1>
-        <div id="idContainer">
+        <!-- <div id="idContainer">
             <input id="movieIdInput" type="number" v-model="movieId" v-on:change.prevent="newMovie"/>
-        </div>
+        </div> -->
         <movie-details />
         <cast-details v-if="!isCastLoading" />
     </div>
@@ -66,7 +65,9 @@ export default {
         searchMovie() {
             tmdbService.searchMovies(this.searchQuery)
                 .then(response => {
+                    this.$store.commit('SET_SEARCH_QUERY', this.searchQuery);
                     this.$store.commit('SET_SEARCH_RESULTS', response.data);
+                    this.$router.push({name:'search'});
                 })
         }
     }
