@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h1>Search Results</h1>
-        {{$store.state.search_query}}
+        <h1>Search Results for "{{$store.state.search_query}}"</h1>
         <div class="resultContainer">
             <search-return v-for="movie in $store.state.search.results" v-bind:key="movie.id" v-bind:movie="movie" />
         </div>

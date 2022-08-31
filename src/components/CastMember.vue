@@ -1,5 +1,5 @@
 <template>
-    <div id="member-detail-container" v-if="isBirthyearAvailable">
+    <div id="member-detail-container" v-if="isBirthyearAvailable" v-on:click.prevent="viewPerson">
         <p class="name" v-bind:class="{dead: isDead}">{{member.name}} ({{birthyear}}-{{deathyear}})</p>
         <p class="character">{{member.character}}</p>
     </div>
@@ -22,8 +22,6 @@ export default {
     created() {
         tmdbService.getPerson(this.member.id)
             .then( response => {
-                //console.log(response.data);
-                // console.log(response.data.name + ": (" + response.data.birthday + "-" + response.data.deathday + ")");
                 this.birthday = response.data.birthday;
                 this.deathday = response.data.deathday;
             })
@@ -32,7 +30,6 @@ export default {
     computed: {
         birthyear() {
             if(this.birthday == null) { return null }
-            // console.log("date: " + this.birthday + " || Full Year: " + new Date(this.birthday).getFullYear() + " || UTC Full Year: " + new Date(this.birthday).getFullYear());
             return new Date(this.birthday).getFullYear();
         },
         deathyear() {
@@ -45,6 +42,12 @@ export default {
         isDead() {
             return !(this.deathday == null);
         }
+    },
+    methods: {
+        viewPerson() {
+            this.$router.push({name: "person", params: {personId: this.member.id}});
+            this.$store.commit('CLEAR_MOVIE_CAST');
+        }
     }
     
 }
@@ -56,7 +59,9 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
-
+#member-detail-container:hover {
+    background-color: rgb(240,240,240);
+}
 .name {
     text-decoration: underline;
     margin-right: 1vw;

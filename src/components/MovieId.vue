@@ -1,10 +1,6 @@
 <template>
     <div id="titleContainer">
-        <div id="searchContainer">
-            <span>Movie Title:&nbsp;</span>
-            <input id="searchBar" type="text" v-model="searchQuery" />
-            <input id="searchButton" type="submit" v-on:click.prevent="searchMovie"/>
-        </div>
+        <search-container />
         <h1>{{$store.state.title}}</h1>
         <!-- <div id="idContainer">
             <input id="movieIdInput" type="number" v-model="movieId" v-on:change.prevent="newMovie"/>
@@ -18,16 +14,17 @@
 import tmdbService from '@/services/TmdbService.js';
 import MovieDetails from './MovieDetails.vue';
 import CastDetails from './CastDetails.vue';
+import SearchContainer from './SearchContainer.vue';
 
 export default {
     name: 'movie-id-title',
     components: {
         MovieDetails,
-        CastDetails
+        CastDetails,
+        SearchContainer
     },
     data() {
         return {
-            searchQuery: '',
             isMovieLoading: true,
             isCastLoading: true
         };
@@ -68,14 +65,6 @@ export default {
                     console.error(error);
                 });
             this.isCastLoading = false;
-        },
-        searchMovie() {
-            tmdbService.searchMovies(this.searchQuery)
-                .then(response => {
-                    this.$store.commit('SET_SEARCH_QUERY', this.searchQuery);
-                    this.$store.commit('SET_SEARCH_RESULTS', response.data);
-                    this.$router.push({name:'search'});
-                })
         }
     }
 }

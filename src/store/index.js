@@ -23,11 +23,21 @@ export default new Vuex.Store({
     SET_CAST(state, cast) {
       state.cast = cast;
     },
+    CLEAR_MOVIE_CAST(state) {
+      state.case = [];
+      state.title = '';
+      state.release_date = '';
+      state.poster_path = '';
+    },
     SET_SEARCH_QUERY(state, query) {
       state.search_query = query;
     },
     SET_SEARCH_RESULTS(state, results) {
       state.search = results;
+    },
+    CLEAR_SEARCH(state) {
+      state.search_query = '';
+      state.search = [];
     }
   },
   actions: {

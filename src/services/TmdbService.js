@@ -15,6 +15,9 @@ export default {
     getPerson(id) {
         return http.get(`/person/${id}`+API_KEY);
     },
+    getFilmography(id) {
+        return http.get(`/person/${id}/movie_credits`+API_KEY);
+    },
     searchMovies(query) {
         return http.get(`/search/movie`+API_KEY+`&query=`+query);
     },

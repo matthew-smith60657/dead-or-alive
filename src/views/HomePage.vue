@@ -16,6 +16,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
 #movie-id {
     display: inline-grid;

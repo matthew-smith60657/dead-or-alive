@@ -40,4 +40,7 @@ export default {
 .pageLink {
     text-decoration: underline;
 }
+.pageLink:hover {
+    color: red;
+}
 </style>

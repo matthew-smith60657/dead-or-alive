@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import SearchResults from '../views/SearchResults.vue'
+import ViewPerson from '../views/ViewPerson.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/search',
     name: 'search',
     component: SearchResults
+  },
+  {
+    path: '/person/:personId',
+    name: 'person',
+    component: ViewPerson
   }
   // {
   //   path: '/search',

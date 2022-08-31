@@ -1,10 +1,14 @@
 <template>
     <div class="movieContainer" v-on:click.prevent="loadMovie">
-        <!-- {{movie}} -->
         <img class="poster" v-bind:src="'https://image.tmdb.org/t/p/original/' + movie.poster_path" v-if="hasPoster" />
-        <h2>{{movie.title}}</h2>
-        <p>{{movie.release_date}}</p>
-        <p>{{movie.overview}}</p>
+        <div class="content">
+            <div class="header">
+                <span class="title">{{movie.title}}</span>
+                <span class="releaseDate">&nbsp;({{releaseYear}})</span>
+                <!-- no tagline in movie Object? -->
+            </div>
+            <p class="overview">{{movie.overview}}</p>
+        </div>
     </div>
 </template>
 
@@ -17,11 +21,15 @@ export default {
     methods: {
         loadMovie(event) {
             this.$router.push({name: "detail", params: {movieId: this.movie.id}});
+            this.$store.commit('CLEAR_SEARCH');
         }
     },
     computed: {
         hasPoster() {
             return this.movie.poster_path != null;
+        },
+        releaseYear() {
+            return new Date(this.movie.release_date).getFullYear(); 
         }
     }
 }
@@ -29,12 +37,35 @@ export default {
 
 <style scoped>
 .movieContainer {
-    border-top: 1px grey solid;
-    border-bottom: 1px grey solid;
-    /* background-image: url("'https://image.tmdb.org/t/p/original/' + this.movie.backdrop_path"); */
+    display: flex;
+    border: 1px grey solid;
+    border-radius: 5px;
+}
+.movieContainer:hover {
+    background-color: rgb(240,240,240);
 }
 .poster {
-    max-height: 200px;
-    margin-top: 1vh;
+    max-width: 5vw;
+}
+.content{ 
+    padding-left: 0.5vw;
+}
+.title {
+    font-size: 2vw;
+}
+.releaseDate {
+    font-size: 1.5vw;
+}
+.header {
+    display: flex;
+    align-items: center;
+}
+.overview {
+    font-size: 1vw;
+    text-align: left;
+}
+.tagline {
+    font-style: italic;
+    font-size: 1.25vw;
 }
 </style>
